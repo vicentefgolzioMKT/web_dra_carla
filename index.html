@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dra. Carla Huaiquivil | Diseño de Sonrisa & Estética</title>
+    <meta name="description" content="Consulta dental de estética en Temuco. Atención personalizada para diseñar tu sonrisa con confianza y profesionalismo.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --ink: #0e1a26;
+            --ink-light: #2a3d52;
+            --teal: #3cbfb4;
+            --teal-dark: #279c92;
+            --teal-pale: #e8f7f6;
+            --cream: #faf8f5;
+            --white: #ffffff;
+            --mid: #6b7c8d;
+            --border: rgba(14,26,38,0.08);
+            --serif: 'Syne', sans-serif;
+            --sans: 'Plus Jakarta Sans', sans-serif;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--sans); color: var(--ink); background: var(--white); overflow-x: hidden; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { display: block; width: 100%; }
+
+        /* ============= NAVBAR ============= */
+        .nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 18px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(250,248,245,0.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            transition: padding 0.3s;
+        }
+        .nav-logo { font-family: var(--serif); font-size: 1.25rem; font-weight: 600; letter-spacing: 0.02em; color: var(--ink); }
+        .nav-logo span { color: var(--teal); }
+        .nav-links { display: flex; gap: 32px; align-items: center; }
+        .nav-links a { font-size: 0.82rem; font-weight: 500; color: var(--ink-light); letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.25s; }
+        .nav-links a:hover { color: var(--teal); }
+        .nav-cta { background: var(--ink); color: var(--white) !important; padding: 9px 22px; border-radius: 50px; letter-spacing: 0.05em !important; transition: background 0.25s !important; }
+        .nav-cta:hover { background: var(--teal) !important; }
+        .mobile-toggle { display: none; cursor: pointer; font-size: 1.4rem; color: var(--ink); }
+
+        /* ============= HERO ============= */
+        .hero {
+            min-height: 100vh;
+            background-color: var(--cream);
+            display: grid;
+            grid-template-columns: 1fr 420px 1fr;
+            align-items: center;
+            padding: 100px 5% 60px;
+            gap: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(ellipse 60% 70% at 50% 60%, rgba(60,191,180,0.07) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-wm {
+            position: absolute; bottom: -30px; left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--serif); font-size: 11vw; font-weight: 300;
+            color: rgba(14,26,38,0.04); white-space: nowrap;
+            user-select: none; pointer-events: none; letter-spacing: -0.02em;
+        }
+        .wm-short { display: none; }
+        .wm-full { display: inline; }
+        .hero-left { z-index: 2; }
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--teal); font-weight: 600; margin-bottom: 20px;
+        }
+        .hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--teal); }
+        .hero-h1 {
+            font-family: var(--serif); font-size: clamp(2.2rem, 3.2vw, 3.4rem);
+            font-weight: 700; line-height: 1.1; color: var(--ink);
+            margin-bottom: 22px; letter-spacing: -0.02em;
+        }
+        .hero-h1 em { font-style: normal; color: var(--teal); font-weight: 800; }
+        .hero-desc { font-size: 1rem; color: var(--mid); line-height: 1.7; max-width: 360px; }
+        .hero-center { z-index: 2; position: relative; }
+        .hero-img-wrap { position: relative; aspect-ratio: 3/4; background: transparent; }
+        .hero-img-wrap img {
+            width: 100%; height: 100%; object-fit: contain;
+            filter: drop-shadow(0 20px 40px rgba(60,191,180,0.25));
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+        .hero-badge {
+            position: absolute; background: var(--white); border-radius: 12px;
+            padding: 12px 16px; box-shadow: 0 8px 24px rgba(14,26,38,0.12);
+            font-size: 0.8rem; font-weight: 600; white-space: nowrap;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .badge-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
+        .badge-dot.pulse { animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(60,191,180,0.4)} 50%{box-shadow:0 0 0 6px rgba(60,191,180,0)} }
+        .b1 { bottom: 30px; left: -20px; }
+        .b2 { top: 40px; right: -20px; }
+        .hero-right { z-index: 2; text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 28px; }
+        .hero-h2 { font-family: var(--serif); font-size: clamp(1.7rem, 2.3vw, 2.4rem); font-weight: 600; line-height: 1.2; color: var(--ink); letter-spacing: -0.02em; }
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: var(--teal); color: var(--white);
+            padding: 15px 32px; border-radius: 50px;
+            font-size: 0.9rem; font-weight: 600; letter-spacing: 0.03em;
+            box-shadow: 0 12px 28px rgba(60,191,180,0.35);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 18px 36px rgba(60,191,180,0.45); }
+        .btn-primary svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; }
+        .hero-stats { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; }
+        .stat-num { font-family: var(--serif); font-size: 2.8rem; font-weight: 800; color: var(--ink); line-height: 1; letter-spacing: -0.03em; }
+        .stat-label { font-size: 0.78rem; color: var(--mid); letter-spacing: 0.05em; text-transform: uppercase; }
+
+        /* ============= PROFILE ============= */
+        .profile { padding: 100px 5%; background: var(--white); }
+        .profile-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .profile-img { border-radius: 20px; overflow: hidden; box-shadow: 0 20px 50px rgba(14,26,38,0.1); aspect-ratio: 4/5; position: relative; }
+        .profile-img img { width: 100%; height: 100%; object-fit: cover; }
+        .profile-img-label {
+            position: absolute; bottom: 20px; left: 20px;
+            background: rgba(14,26,38,0.85); color: white; padding: 8px 16px; border-radius: 8px;
+            font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 500;
+            backdrop-filter: blur(4px);
+        }
+        .section-tag {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--teal); font-weight: 600; margin-bottom: 14px;
+        }
+        .section-tag::before { content: '—'; }
+        .section-h2 {
+            font-family: var(--serif); font-size: clamp(1.9rem, 2.8vw, 2.8rem);
+            font-weight: 700; line-height: 1.15; color: var(--ink); margin-bottom: 20px; letter-spacing: -0.02em;
+        }
+        .profile-bio { font-size: 1.05rem; color: var(--mid); line-height: 1.75; margin-bottom: 32px; }
+        .check-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; }
+        .check-item { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--ink-light); }
+        .check-item::before {
+            content: ''; width: 18px; height: 18px; border-radius: 50%;
+            background: var(--teal-pale); border: 2px solid var(--teal); flex-shrink: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%233cbfb4' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: center; background-size: 10px;
+        }
+        .services-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 60px; max-width: 1100px; margin-left: auto; margin-right: auto; }
+        .s-card {
+            background: var(--cream); border-radius: 16px; padding: 30px 24px; text-align: center;
+            border: 1px solid var(--border); transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+        .s-card:hover { transform: translateY(-6px); border-color: var(--teal); box-shadow: 0 16px 40px rgba(60,191,180,0.15); }
+        .s-icon { width: 52px; height: 52px; background: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; border: 1px solid var(--border); }
+        .s-icon svg { width: 24px; height: 24px; fill: var(--teal); }
+        .s-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; color: var(--ink); }
+        .s-card p { font-size: 0.88rem; color: var(--mid); line-height: 1.55; }
+
+        /* ============= STORY ============= */
+        .story { background: var(--ink); color: var(--white); padding: 100px 5%; position: relative; overflow: hidden; }
+        .story::before {
+            content: ''; position: absolute; top: -100px; right: -100px; width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(60,191,180,0.12) 0%, transparent 70%); pointer-events: none;
+        }
+        .story-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+        .story-line { width: 40px; height: 2px; background: var(--teal); margin-bottom: 24px; }
+        .story-h { font-family: var(--serif); font-size: clamp(2rem, 3.2vw, 3.2rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; }
+        .story-h em { font-style: normal; color: var(--teal); }
+        .story-p { font-size: 1.05rem; line-height: 1.8; color: rgba(255,255,255,0.75); margin-bottom: 20px; }
+        .story-cta { display: inline-flex; align-items: center; gap: 10px; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); font-weight: 600; margin-top: 12px; }
+        .story-arrow { animation: bounce 2s infinite; }
+        @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(4px)} }
+
+        /* ============= REVIEWS ============= */
+        .reviews { padding: 100px 0; background: var(--cream); overflow: hidden; }
+        .reviews-head { text-align: center; margin-bottom: 48px; padding: 0 20px; }
+        .reviews-head .section-h2 { margin-bottom: 8px; }
+        .reviews-sub { font-size: 0.95rem; color: var(--mid); display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .stars-gold { color: #f5a623; letter-spacing: 2px; }
+        .rev-track { display: flex; gap: 20px; overflow-x: auto; padding: 12px 40px 30px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+        .rev-track::-webkit-scrollbar { display: none; }
+        .rev-card { min-width: 300px; max-width: 320px; flex-shrink: 0; background: var(--white); border-radius: 16px; padding: 28px; border: 1px solid var(--border); scroll-snap-align: start; transition: transform 0.3s, box-shadow 0.3s; }
+        .rev-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(14,26,38,0.1); }
+        .rev-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
+        .rev-user { display: flex; align-items: center; gap: 12px; }
+        .rev-av { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 500; font-size: 1rem; color: white; background: #6c63ff; }
+        .rev-card:nth-child(2n) .rev-av { background: #e04a5e; }
+        .rev-card:nth-child(3n) .rev-av { background: #1c7ed6; }
+        .rev-card:nth-child(4n) .rev-av { background: #2f9e44; }
+        .rev-name { font-size: 0.9rem; font-weight: 600; color: var(--ink); }
+        .rev-date { font-size: 0.75rem; color: var(--mid); margin-top: 2px; }
+        .rev-stars { color: #f5a623; font-size: 1rem; letter-spacing: 2px; margin-bottom: 10px; }
+        .rev-text { font-size: 0.9rem; color: #4a5568; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
+        .g-icon { width: 20px; flex-shrink: 0; }
+        .rev-cta { text-align: center; margin-top: 32px; padding: 0 20px; }
+        .btn-outline { display: inline-flex; align-items: center; gap: 8px; border: 1.5px solid var(--border); color: #1a73e8; padding: 10px 26px; border-radius: 50px; font-size: 0.88rem; font-weight: 600; transition: background 0.2s, border-color 0.2s; }
+        .btn-outline:hover { background: #f8faff; border-color: #1a73e8; }
+
+        /* ============= CASES ============= */
+        .cases { padding: 100px 5%; background: var(--white); }
+        .cases-inner { max-width: 1100px; margin: 0 auto; }
+        .section-head { text-align: center; margin-bottom: 60px; }
+        .cases-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+        .case-card { border-radius: 16px; overflow: hidden; box-shadow: 0 6px 24px rgba(14,26,38,0.07); border: 1px solid var(--border); transition: transform 0.3s, box-shadow 0.3s; }
+        .case-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(14,26,38,0.12); }
+        .case-img-row { display: flex; border-bottom: 1px solid var(--border); }
+        .case-half { width: 50%; position: relative; overflow: hidden; }
+        .case-half:first-child { border-right: 2px solid var(--white); }
+        .case-half img { width: 100%; aspect-ratio: 1; object-fit: cover; transition: transform 0.5s; }
+        .case-card:hover .case-half img { transform: scale(1.05); }
+        .case-badge { position: absolute; bottom: 10px; background: rgba(14,26,38,0.82); color: white; font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 4px; letter-spacing: 0.06em; backdrop-filter: blur(4px); }
+        .badge-l { left: 10px; } .badge-r { right: 10px; }
+        .case-body { padding: 24px; }
+        .case-body h3 { font-family: var(--serif); font-size: 1.2rem; font-weight: 700; color: var(--ink); margin-bottom: 6px; letter-spacing: -0.01em; }
+        .case-body p { font-size: 0.88rem; color: var(--mid); line-height: 1.55; }
+
+        /* ============= OFFER ============= */
+        .offer { padding: 110px 20px; background: var(--ink); position: relative; overflow: hidden; text-align: center; }
+        .offer::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 700px; height: 700px; background: radial-gradient(circle, rgba(60,191,180,0.12) 0%, transparent 65%); pointer-events: none; }
+        .offer-card { background: var(--white); max-width: 560px; margin: 0 auto; position: relative; z-index: 5; border-radius: 4px; border-top: 4px solid var(--teal); padding: 52px 44px; box-shadow: 0 24px 60px rgba(0,0,0,0.35); }
+        .offer-tag { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mid); font-weight: 600; }
+        .offer-h { font-family: var(--serif); font-size: 2.4rem; font-weight: 700; color: var(--ink); margin: 10px 0; line-height: 1.1; letter-spacing: -0.02em; }
+        .offer-sub { font-size: 0.95rem; color: var(--mid); margin-bottom: 32px; }
+        .benefit-list { text-align: left; display: inline-flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+        .ben { display: flex; align-items: center; gap: 12px; font-size: 0.93rem; color: var(--ink-light); }
+        .ben-icon { width: 22px; height: 22px; border-radius: 50%; background: var(--teal-pale); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .ben-icon svg { width: 12px; height: 12px; stroke: var(--teal); fill: none; stroke-width: 2.5; }
+        .divider { width: 100%; height: 1px; background: var(--border); margin: 24px 0; }
+        .offer-price { font-family: var(--serif); font-size: 2rem; font-weight: 700; color: var(--ink); letter-spacing: -0.01em; }
+        .offer-note { font-size: 0.83rem; color: var(--teal); font-weight: 600; margin-top: 4px; }
+        .btn-offer { display: block; width: 100%; background: var(--ink); color: var(--white); padding: 17px; margin-top: 20px; border-radius: 4px; font-weight: 600; font-size: 0.9rem; letter-spacing: 0.07em; text-transform: uppercase; transition: background 0.3s; }
+        .btn-offer:hover { background: var(--teal); }
+        .offer-limit { margin-top: 14px; font-size: 0.78rem; color: var(--mid); }
+
+        /* ============= TREATMENTS ============= */
+        .treats { padding: 100px 5%; background: var(--cream); border-top: 1px solid var(--border); }
+        .treats-inner { max-width: 1100px; margin: 0 auto; display: flex; gap: 70px; align-items: start; }
+        .treats-services { flex: 1; }
+        .treats-video { flex: 1; position: sticky; top: 90px; }
+        .treats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 30px; }
+        .treat-item { background: var(--white); border-radius: 14px; overflow: hidden; border: 1px solid var(--border); transition: transform 0.3s, border-color 0.3s; }
+        .treat-item:hover { transform: translateY(-4px); border-color: var(--teal); }
+        .treat-img { aspect-ratio: 1; overflow: hidden; }
+        .treat-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+        .treat-item:hover .treat-img img { transform: scale(1.06); }
+        .treat-label { padding: 12px 14px; font-size: 0.88rem; font-weight: 600; color: var(--ink); }
+
+        /* VIDEO — clave: position relative en el wrapper */
+        .vid-wrap {
+            border-radius: 16px; overflow: hidden;
+            background: #000; position: relative;
+            aspect-ratio: 9/16;
+            box-shadow: 0 16px 40px rgba(14,26,38,0.15);
+        }
+        .vid-wrap iframe {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%; border: 0;
+        }
+
+        /* ============= LOCATION ============= */
+        .location { max-width: 1100px; margin: 0 auto 100px; padding: 0 20px; }
+        .loc-grid { display: grid; grid-template-columns: 1fr 1fr; border-radius: 16px; overflow: hidden; box-shadow: 0 12px 40px rgba(14,26,38,0.09); border: 1px solid var(--border); }
+        .loc-img { position: relative; min-height: 400px; }
+        .loc-img img { width: 100%; height: 100%; object-fit: cover; }
+        .loc-right { display: flex; flex-direction: column; }
+        .loc-map { flex: 1; min-height: 260px; position: relative; }
+        .loc-map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+        .loc-text { padding: 36px; background: #f9f9f8; }
+        .loc-title { font-family: var(--serif); font-size: 1.4rem; font-weight: 700; color: var(--ink); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; letter-spacing: -0.01em; }
+        .loc-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 4px rgba(60,191,180,0.2); flex-shrink: 0; }
+        .loc-desc { font-size: 0.93rem; color: var(--mid); line-height: 1.7; }
+
+        /* ============= WA BANNER ============= */
+        .wa-banner { padding: 60px 20px; display: flex; justify-content: center; background: var(--white); }
+        .wa-link { display: inline-block; text-align: center; background: linear-gradient(135deg, #3cbfb4 0%, #0d6fb8 100%); color: white; padding: 28px 56px; border-radius: 50px; max-width: 560px; width: 100%; box-shadow: 0 12px 32px rgba(60,191,180,0.35); transition: transform 0.3s, box-shadow 0.3s; }
+        .wa-link:hover { transform: translateY(-4px); box-shadow: 0 20px 48px rgba(60,191,180,0.45); }
+        .wa-main { display: block; font-family: var(--serif); font-size: 1.9rem; font-weight: 700; line-height: 1.15; margin-bottom: 8px; letter-spacing: -0.02em; }
+        .wa-sub { display: block; font-size: 0.95rem; opacity: 0.9; }
+
+        /* ============= FOOTER ============= */
+        /* FAQ */
+        .faq-list { display: flex; flex-direction: column; border-top: 1px solid var(--border); }
+        .faq-item { border-bottom: 1px solid var(--border); }
+        .faq-q {
+            width: 100%; background: none; border: none; padding: 24px 0;
+            display: flex; justify-content: space-between; align-items: center;
+            font-family: var(--serif); font-size: 1.15rem; font-weight: 600;
+            color: var(--ink); cursor: pointer; text-align: left; gap: 16px;
+            transition: color 0.2s;
+        }
+        .faq-q:hover, .faq-q.open { color: var(--teal); }
+        .faq-icon { font-size: 1.5rem; font-weight: 300; color: var(--teal); flex-shrink: 0; transition: transform 0.3s; line-height: 1; }
+        .faq-q.open .faq-icon { transform: rotate(45deg); }
+        .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.3s ease; }
+        .faq-a.open { max-height: 220px; padding-bottom: 22px; }
+        .faq-a p { font-size: 0.95rem; color: var(--mid); line-height: 1.75; }
+
+        footer { background: #08111a; color: #5a6a7a; padding: 36px 5%; text-align: center; font-size: 0.82rem; border-top: 1px solid rgba(255,255,255,0.04); }
+        footer a { color: #5a6a7a; margin: 0 12px; transition: color 0.2s; }
+        footer a:hover { color: var(--teal); }
+
+        /* ============= FLOAT WA ============= */
+        .float-wa { position: fixed; bottom: 28px; right: 28px; width: 56px; height: 56px; background: #25D366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(0,0,0,0.25); z-index: 2000; transition: transform 0.3s; }
+        .float-wa:hover { transform: scale(1.1); }
+        .float-wa svg { width: 28px; height: 28px; fill: currentColor; }
+
+        /* ============= RESPONSIVE ============= */
+        @media (max-width: 1000px) {
+            .nav-links { display: none; }
+            .mobile-toggle { display: block; }
+            .hero { display: flex; flex-direction: column; padding: 90px 6% 50px; min-height: 100svh; gap: 0; }
+            .hero-wm { font-size: 22vw; bottom: 10px; letter-spacing: -0.03em; width: auto; left: 0; transform: none; text-align: left; padding-left: 4%; }
+            .wm-full { display: none; }
+            .wm-short { display: inline; }
+            .hero-left { order: 1; text-align: left; padding-bottom: 0; flex: 0; }
+            .hero-eyebrow { font-size: 0.7rem; margin-bottom: 12px; }
+            .hero-h1 { font-size: clamp(1.55rem, 5.5vw, 2.2rem); margin-bottom: 0; }
+            .hero-desc { display: none; }
+            .hero-center { order: 2; flex: 1; display: flex; align-items: center; justify-content: center; padding: 10px 0; }
+            .hero-img-wrap { aspect-ratio: 3/4; width: 55vw; max-width: 260px; margin: 0 auto; }
+            .b1 { left: -10px; bottom: 16px; padding: 8px 11px; font-size: 0.72rem; }
+            .b2 { right: -10px; top: 24px; padding: 8px 11px; font-size: 0.72rem; }
+            .hero-right { order: 3; align-items: flex-end; text-align: right; gap: 16px; flex: 0; }
+            .hero-h2 { font-size: clamp(1.3rem, 4.5vw, 1.8rem); }
+            .hero-stats { align-items: flex-end; }
+            .stat-num { font-size: 2.2rem; }
+            .stat-label { font-size: 0.72rem; }
+            .btn-primary { padding: 13px 24px; font-size: 0.85rem; }
+            .profile-inner { grid-template-columns: 1fr; gap: 40px; }
+            .services-row { grid-template-columns: 1fr; }
+            .story-inner { grid-template-columns: 1fr; gap: 40px; }
+            .cases-grid { grid-template-columns: 1fr; }
+            .treats-inner { flex-direction: column; }
+            .treats-video { position: static; }
+            .vid-wrap { max-width: 320px; margin: 0 auto; }
+            .loc-grid { grid-template-columns: 1fr; }
+            .loc-img { height: 250px; min-height: auto; }
+        }
+        @media (max-width: 640px) {
+            .check-list { grid-template-columns: 1fr; }
+            .treats-grid { grid-template-columns: 1fr 1fr; }
+            .offer-card { padding: 32px 24px; }
+            .float-wa { bottom: 18px; right: 18px; width: 48px; height: 48px; }
+        }
+
+        /* ============= SCROLL ANIMATIONS ============= */
+        .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="nav">
+        <a href="#" class="nav-logo">
+            <img src="logo.png" alt="Dra. Carla Huaiquivil" style="height: 40px; width: auto; display: block;">
+        </a>
+        <div class="mobile-toggle">☰</div>
+        <ul class="nav-links">
+            <li><a href="#profile">Perfil</a></li>
+            <li><a href="#story">Filosofía</a></li>
+            <li><a href="#gallery">Casos</a></li>
+            <li><a href="#treats">Tratamientos</a></li>
+            <li><a href="#location">Ubicación</a></li>
+            <li><a href="#offer" class="nav-cta">Agendar Evaluación</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero">
+        <div class="hero-wm"><span class="wm-full">DRA. CARLA HUAIQUIVIL</span><span class="wm-short">HUAIQUIVIL</span></div>
+
+        <div class="hero-left">
+            <div class="hero-eyebrow">Temuco · Consulta Dental</div>
+            <h1 class="hero-h1">
+                Evaluación dental completa.<br>
+                <em>Resolvemos dudas de tu plan de tratamiento.</em>
+            </h1>
+            <p class="hero-desc">Te explicaré diferentes opciones de tratamiento de acuerdo a tus expectativas y prioridades escuchando tus dudas e inquietudes.</p>
+        </div>
+
+        <div class="hero-center">
+            <div class="hero-img-wrap">
+                <img src="diente_hero.png" alt="Diente tecnológico" loading="eager">
+                <div class="hero-badge b1"><span class="badge-dot pulse"></span>Tecnología 3D</div>
+                <div class="hero-badge b2"><span class="badge-dot"></span>Sin Dolor</div>
+            </div>
+        </div>
+
+        <div class="hero-right">
+            <div class="hero-stats">
+                <span class="stat-num">5+</span>
+                <span class="stat-label">Años de experiencia</span>
+            </div>
+            <h2 class="hero-h2">Trato directo con tu<br>dentista de confianza.</h2>
+            <a href="#offer" class="btn-primary">
+                Agendar una visita
+                <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- PROFILE -->
+    <section id="profile" class="profile">
+        <div class="profile-inner fade-up">
+            <div class="profile-img">
+                <img src="dra.jpg" loading="lazy" alt="Dra. Carla Huaiquivil">
+                <div class="profile-img-label">Cirujano Dentista</div>
+            </div>
+            <div>
+                <div class="section-tag">Sobre la Doctora</div>
+                <h2 class="section-h2">Dra. Carla Huaiquivil</h2>
+                <p class="profile-bio">Transformando sonrisas con confianza y profesionalismo. Cada paciente recibe una planificación única basada en sus objetivos reales.</p>
+                <div class="check-list">
+                    <div class="check-item">Más de 5 años de experiencia</div>
+                    <div class="check-item">Especialista en estética dental</div>
+                    <div class="check-item">Atención completamente personalizada</div>
+                    <div class="check-item">Resultados duraderos y naturales</div>
+                    <div class="check-item">Insumos de alta calidad</div>
+                </div>
+            </div>
+        </div>
+        <div class="services-row fade-up">
+            <div class="s-card">
+                <div class="s-icon"><svg viewBox="0 0 512 512"><path d="M144.5 91.8c-7.5-23.1-34.8-35-56.7-24.6C59.5 80.7 44.7 113.8 48 153.5c4.7 56.4 28.6 139.9 83.1 229.7 13.9 22.9 44.4 28.7 66.2 13.4l11.6-8.1c17.1-12 21.6-35.7 10.3-53.1L188 287.6c-7.3-11.2-6.5-25.9 2.7-36.2l79.4-88.7c7.9-8.8 9.2-21.9 3.1-32.1l-25.6-43.1c-11.1-18.7-36.5-21.9-52.2-6.6l-29.2 28.4c-9.1 8.9-23.7 8.2-31.8-1.5zM358.5 68.2c-15.7-15.3-41-12.1-52.2 6.6l-25.6 43.1c-6.1 10.2-4.8 23.3 3.1 32.1l79.4 88.7c9.2 10.3 10 25 2.7 36.2l-31.2 47.9c-11.3 17.4-6.8 41.1 10.3 53.1l11.6 8.1c21.8 15.3 52.3 9.5 66.2-13.4 54.5-89.8 78.4-173.3 83.1-229.7 3.3-39.7-11.5-72.8-39.8-86.3-21.9-10.4-49.2 1.5-56.7 24.6l-21.6 66.7c-8 24.7-43 24.5-50.9 0l-21.6-66.7z"/></svg></div>
+                <h3>Limpieza Dental</h3>
+                <p>Elimina placa y sarro para una salud base perfecta y duradera.</p>
+            </div>
+            <div class="s-card">
+                <div class="s-icon"><svg viewBox="0 0 512 512"><path d="M325.8 202.6l49.8-111.4c6.3-14.1 26.5-14.1 32.8 0l49.8 111.4 111.4 49.8c14.1 6.3 14.1 26.5 0 32.8l-111.4 49.8-49.8 111.4c-6.3 14.1-26.5 14.1-32.8 0l-49.8-111.4-111.4-49.8c-14.1-6.3-14.1-26.5 0-32.8l111.4-49.8zM41.5 282.9L82.7 264.4c5.3-2.4 5.3-9.9 0-12.3L41.5 233.7c-5.3-2.4-8.8-7.7-8.8-13.5V175c0-8.3 6.7-15 15-15h45.2c5.8 0 11.1-3.5 13.5-8.8L124.9 109.9c2.4-5.3 9.9-5.3 12.3 0l18.5 41.2c2.4 5.3 7.7 8.8 13.5 8.8H214.4c8.3 0 15 6.7 15 15v45.2c0 5.8 3.5 11.1 8.8 13.5l41.2 18.5c5.3 2.4 5.3 9.9 0 12.3l-41.2 18.5c-5.3 2.4-8.8 7.7-8.8 13.5V337c0 8.3-6.7 15-15 15H169.2c-5.8 0-11.1 3.5-13.5 8.8L137.2 402.1c-2.4 5.3-9.9 5.3-12.3 0l-18.5-41.2c-2.4-5.3-7.7-8.8-13.5-8.8H47.7c-8.3 0-15-6.7-15-15v-45.2c0-5.8-3.5-11.1-8.8-13.5z"/></svg></div>
+                <h3>Estética Dental</h3>
+                <p>Diseño de sonrisa y blanqueamientos para iluminar tu rostro.</p>
+            </div>
+            <div class="s-card">
+                <div class="s-icon"><svg viewBox="0 0 512 512"><path d="M466.5 83.7l-192-80a48.15 48.15 0 0 0-36.9 0l-192 80C27.7 91.1 16 108.6 16 128c0 198.3 114.5 335.7 221.5 380.3 11.8 4.9 25.1 4.9 36.9 0C360.1 472.6 496 349.3 496 128c0-19.4-11.7-36.9-29.5-44.3zM256.1 446.3l-.1-381 155.1 64.7c3.9 1.6 6.4 5.3 6.4 9.6 0 148.9-88.7 266.3-161.4 306.7z"/></svg></div>
+                <h3>Rehabilitación</h3>
+                <p>Protección y restauración funcional para una mordida perfecta.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- STORY -->
+    <section id="story" class="story">
+        <div class="story-inner">
+            <div class="fade-up">
+                <div class="story-line"></div>
+                <h2 class="story-h">A veces el problema no es un dolor físico, sino <em>esa barrera invisible que te frena.</em></h2>
+            </div>
+            <div class="fade-up">
+                <p class="story-p">Es más común de lo que imaginas: sentir que debes cuidar cómo hablas, evitar que alguien se acerque demasiado o "apagarte" en situaciones sociales. Esa pequeña tensión constante te quita energía.</p>
+                <p class="story-p">Por eso, aquí creamos un espacio seguro y libre de juicios.</p>
+                <p class="story-p">Cuando por fin entiendes tu diagnóstico y descubres que existen opciones claras y a tu medida, esa carga desaparece. No buscamos dientes perfectos, buscamos que vuelvas a desenvolverte con total seguridad.</p>
+                <p class="story-p">Esa tranquilidad es justo lo que viven quienes nos visitan:</p>
+                <div class="story-cta">
+                    Historias reales de pacientes
+                    <svg class="story-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CASES -->
+    <section id="gallery" class="cases">
+        <div class="cases-inner">
+            <div class="section-head fade-up">
+                <div class="section-tag" style="justify-content:center;">Resultados Reales</div>
+                <h2 class="section-h2">Transformaciones de Pacientes</h2>
+                <p style="text-align:center;color:var(--mid);font-size:0.9rem;margin-top:6px;">Fotos que nos envían nuestros pacientes</p>
+            </div>
+            <div class="cases-grid fade-up">
+                <div class="case-card">
+                    <div class="case-img-row">
+                        <div class="case-half"><span class="case-badge badge-l">ANTES</span><img src="antes_1.jpg" alt="Antes"></div>
+                        <div class="case-half"><span class="case-badge badge-r">DESPUÉS</span><img src="despues_1.jpg" alt="Después"></div>
+                    </div>
+                    <div class="case-body">
+                        <h3>Limpieza dental + Blanqueamiento con técnica combinada</h3>
+                        <p>"Mi seguridad aumentó en un 100%, ahora me saco fotos sonriendo. No había logrado este resultado con otros tratamientos."</p>
+                    </div>
+                </div>
+                <div class="case-card">
+                    <div class="case-img-row">
+                        <div class="case-half"><span class="case-badge badge-l">ANTES</span><img src="antes_2.jpg" alt="Antes"></div>
+                        <div class="case-half"><span class="case-badge badge-r">DESPUÉS</span><img src="despues_2.jpeg" alt="Después"></div>
+                    </div>
+                    <div class="case-body">
+                        <h3>Limpieza dental + Blanqueamiento con técnica combinada</h3>
+                        <p>"Después del blanqueamiento sentí una leve sensibilidad, pero nada importante. Ya con las cubetas de mantenimiento, cero sensibilidad. Estoy muy feliz con los resultados."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section class="reviews">
+        <div class="reviews-head fade-up">
+            <div class="section-tag" style="justify-content:center;">Opiniones Verificadas</div>
+            <h2 class="section-h2">Lo que dicen en Google Maps</h2>
+            <p class="reviews-sub"><span class="stars-gold">★★★★★</span> 5.0 · Reseñas verificadas en Google</p>
+        </div>
+        <div class="rev-track">
+            <div class="rev-card">
+                <div class="rev-top">
+                    <div class="rev-user"><div class="rev-av">C</div><div><div class="rev-name">Constanza C.</div><div class="rev-date">Hace 7 semanas</div></div></div>
+                    <svg class="g-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.21-1.19-.63z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                </div>
+                <div class="rev-stars">★★★★★</div>
+                <p class="rev-text">¡Excelente atención! La Dra. Carla es muy cuidadosa en cada procedimiento. Me hice un blanqueamiento y otros tratamientos con ella y mis dientes quedaron muy bonitos. ¡La recomiendo 100%! 🙌</p>
+            </div>
+            <div class="rev-card">
+                <div class="rev-top">
+                    <div class="rev-user"><div class="rev-av">D</div><div><div class="rev-name">Diego Andrés</div><div class="rev-date">Hace 7 semanas</div></div></div>
+                    <svg class="g-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.21-1.19-.63z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                </div>
+                <div class="rev-stars">★★★★★</div>
+                <p class="rev-text">Me hice un blanqueamiento con ella y quedó 10/10. Me gustó el resultado, quedaron muy blancos 😄</p>
+            </div>
+            <div class="rev-card">
+                <div class="rev-top">
+                    <div class="rev-user"><div class="rev-av">F</div><div><div class="rev-name">Felipe Millaquen Muñoz</div><div class="rev-date">Hace 7 semanas</div></div></div>
+                    <svg class="g-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.21-1.19-.63z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                </div>
+                <div class="rev-stars">★★★★★</div>
+                <p class="rev-text">Me realicé una limpieza, quedé excelente. Muy feliz con el resultado. Antes me había hecho limpiezas pero nunca me habían dejado tan limpios los dientes. La profesional me dedicó una hora de atención y se encargó de resolver mis dudas, cosa que en otros lados solo me dedicaban 15 minutos.</p>
+            </div>
+        </div>
+        <div class="rev-cta fade-up">
+            <a href="https://www.google.com/search?sca_esv=a598d55f83047397&biw=1366&bih=633&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOTx4rAMtsAtJk2o8XENggZwLbq_fX1aEn8llhMDVPd194dr5W3e9pBYqlGFZTnkGK0fLcL62H3H5w-VKIK1GE_XLO_ACVueUr1stIZbtV259Bbx-6lJuNaJDDmHU_xRKGutmAIs%3D&q=Dra.+Carla+Huaiquivil+%7C+Cirujano+Dentista+Opiniones&sa=X&ved=2ahUKEwiZ3rzokKCTAxXFqpUCHXTJASIQ0bkNegQIHxAH" target="_blank" class="btn-outline">
+                <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.21-1.19-.63z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                Ver todas las reseñas en Google Maps
+            </a>
+        </div>
+    </section>
+
+    <!-- OFFER -->
+    <section id="offer" class="offer">
+        <div class="offer-card fade-up">
+            <div class="offer-tag">Experiencia Smile Again</div>
+            <h2 class="offer-h">Experiencia<br>Smile Again</h2>
+            <p class="offer-sub">No es solo una consulta. Es el primer paso real hacia tu nueva imagen.</p>
+            <ul class="benefit-list">
+                <li class="ben"><span class="ben-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Diagnóstico clínico completo</li>
+                <li class="ben"><span class="ben-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Limpieza dental exhaustiva + destartaje</li>
+                <li class="ben"><span class="ben-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Presupuesto personalizado sin compromiso</li>
+            </ul>
+            <div class="divider"></div>
+            <div class="offer-price">Reserva por $14.990 CLP</div>
+            <div class="offer-note">*¡Haz que tu limpieza te salga GRATIS! Si decides dar el siguiente paso hacia un blanqueamiento, el 100% de lo que pagaste hoy se descontará del valor total.</div>
+            <a href="https://wa.me/56920691504" class="btn-offer">Quiero agendar mi sesión</a>
+            <p class="offer-limit">Solo 10 cupos disponibles este mes.</p>
+        </div>
+    </section>
+
+    <!-- TREATMENTS -->
+    <section id="treats" class="treats">
+        <div class="treats-inner">
+            <div class="treats-services fade-up">
+                <div class="section-tag">Tratamientos</div>
+                <h2 class="section-h2">Nuestros Servicios</h2>
+                <div class="treats-grid">
+                    <div class="treat-item">
+                        <div class="treat-img"><img src="blanqueamiento.jpg" loading="lazy" alt="Blanqueamiento"></div>
+                        <div class="treat-label">Blanqueamiento Dental</div>
+                    </div>
+                    <div class="treat-item">
+                        <div class="treat-img"><img src="carilla.jpg" loading="lazy" alt="Carillas"></div>
+                        <div class="treat-label">Carilla de Resina</div>
+                    </div>
+                    <div class="treat-item">
+                        <div class="treat-img"><img src="protesis.jpg" loading="lazy" alt="Implantes"></div>
+                        <div class="treat-label">Prótesis Dental Removible</div>
+                    </div>
+                    <div class="treat-item">
+                        <div class="treat-img"><img src="limpieza.jpg" loading="lazy" alt="Ortodoncia"></div>
+                        <div class="treat-label">Limpieza Dental</div>
+                    </div>
+                </div>
+            </div>
+            <div class="treats-video fade-up">
+                <div class="section-tag">Destacado</div>
+                <h2 class="section-h2">Promoción destacada</h2>
+                <div class="vid-wrap">
+                    <iframe
+                        src="https://www.youtube.com/embed/AvJPoqLrIR8"
+                        title="Resultados Dra. Carla Huaiquivil"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" style="padding: 100px 20px; background: var(--cream);">
+        <div style="max-width: 760px; margin: 0 auto;">
+            <div class="section-head fade-up" style="text-align:center; margin-bottom: 56px;">
+                <div class="section-tag" style="justify-content:center;">Preguntas Frecuentes</div>
+                <h2 class="section-h2">Lo que más nos preguntan</h2>
+            </div>
+            <div class="faq-list fade-up">
+
+                <div class="faq-item">
+                    <button class="faq-q" onclick="toggleFaq(this)">
+                        ¿Duele el blanqueamiento?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-a">
+                        <p>Puede causar sensibilidad temporal de 24 a 48 horas, especialmente en dientes sensibles. Es completamente normal y desaparece sola. Trabajamos con productos que minimizan este efecto al máximo.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-q" onclick="toggleFaq(this)">
+                        ¿En qué consiste la limpieza dental?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-a">
+                        <p>Eliminamos el sarro y la placa acumulada con ultrasonido. No duele, dura aproximadamente 30 minutos y los dientes quedan notablemente más limpios y frescos desde la primera sesión.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-q" onclick="toggleFaq(this)">
+                        ¿Cuánto duran los resultados del blanqueamiento?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-a">
+                        <p>Entre 1 y 2 años dependiendo de hábitos como café, té o tabaco. Con las cubetas de mantenimiento en casa el resultado se prolonga considerablemente.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-q" onclick="toggleFaq(this)">
+                        ¿Qué es una carilla de resina?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-a">
+                        <p>Es una capa delgada que se adhiere al frente del diente para mejorar su forma, color o tamaño. Se realiza en una sola sesión, sin desgaste del diente y con un resultado natural inmediato.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-q" onclick="toggleFaq(this)">
+                        ¿Puedo agendar si tengo mucho miedo al dentista?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-a">
+                        <p>Absolutamente. Trabajamos especialmente con pacientes que han tenido malas experiencias. El primer paso es solo conversar y entender tus opciones, sin ningún compromiso ni presión.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- LOCATION -->
+    <section id="location" class="location">
+        <div class="section-head fade-up">
+            <div class="section-tag" style="justify-content:center;">Cómo Llegar</div>
+            <h2 class="section-h2">Encuéntranos en Temuco</h2>
+        </div>
+        <div class="loc-grid fade-up">
+            <div class="loc-img">
+                <img src="box.jpg" alt="Entrada Clínica">
+            </div>
+            <div class="loc-right">
+                <div class="loc-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3112.2569536641486!2d-72.60719449999999!3d-38.7348654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9614d3f117487e09%3A0x60086266c1d418de!2sTrizano%20430%2C%204801023%20Cautin%2C%20Temuco%2C%20Araucan%C3%ADa!5e0!3m2!1ses!2scl!4v1768512468496!5m2!1ses!2scl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <div class="loc-text">
+                    <h3 class="loc-title"><span class="loc-dot"></span>Trizano 430, Oficina 308, Temuco</h3>
+                    <p class="loc-desc">Espacio cómodo, seguro y tranquilo a pasos de Avenida Alemania. Estacionamiento cercano y fácil acceso en transporte público.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WA BANNER -->
+    <div class="wa-banner">
+        <a href="https://wa.me/56920691504?text=Hola%2C%20tengo%20algunas%20dudas%20sobre%20los%20tratamientos%20y%20quisiera%20informaci%C3%B3n." target="_blank" class="wa-link" aria-label="Consultar por WhatsApp">
+            <span class="wa-main">Conversemos por WhatsApp</span>
+            <span class="wa-sub">Agenda tu atención directamente conmigo →</span>
+        </a>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2025 Dra. Carla Huaiquivil · Odontología Estética en Temuco</p>
+        <p style="margin-top:12px;">
+            <a href="#">Instagram</a>
+            <a href="https://wa.me/56920691504">WhatsApp</a>
+        </p>
+        <p style="margin-top:20px;font-size:0.68rem;color:rgba(255,255,255,0.12);letter-spacing:0.04em;">Desarrollado por <a href="https://golzio.cl" target="_blank" style="color:rgba(255,255,255,0.18);text-decoration:none;">golzio.cl</a></p>
+    </footer>
+
+    <!-- FLOAT WA -->
+    <a href="https://wa.me/56920691504?text=Hola,%20quisiera%20más%20información." class="float-wa" target="_blank" aria-label="WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+    </a>
+
+    <script>
+        function toggleFaq(btn) {
+            const item = btn.closest('.faq-item');
+            const answer = item.querySelector('.faq-a');
+            const isOpen = btn.classList.contains('open');
+            // Close all
+            document.querySelectorAll('.faq-q.open').forEach(b => {
+                b.classList.remove('open');
+                b.closest('.faq-item').querySelector('.faq-a').classList.remove('open');
+            });
+            // Open clicked if it was closed
+            if (!isOpen) { btn.classList.add('open'); answer.classList.add('open'); }
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(el => { if (el.isIntersecting) { el.target.classList.add('visible'); } });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        document.querySelector('.mobile-toggle').addEventListener('click', () => {
+            const links = document.querySelector('.nav-links');
+            if (links.style.display === 'flex') {
+                links.style.display = 'none';
+            } else {
+                links.style.cssText = 'display:flex;flex-direction:column;position:fixed;top:60px;left:0;right:0;background:rgba(250,248,245,0.97);padding:24px 5%;gap:20px;border-bottom:1px solid rgba(14,26,38,0.08);backdrop-filter:blur(16px);z-index:999;';
+            }
+        });
+    </script>
+</body>
+</html>
