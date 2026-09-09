@@ -26,14 +26,26 @@
         }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
-        body { font-family: var(--sans); color: var(--ink); background: var(--white); overflow-x: hidden; }
+        body { font-family: var(--sans); color: var(--ink); background: var(--white); overflow-x: hidden; line-height: 1.6; letter-spacing: 0.005em; }
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
         img { display: block; width: 100%; }
 
+        /* ============= SITE HEADER (PAY BAR + NAVBAR) ============= */
+        .site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; }
+
+        .pay-bar { background: var(--ink); overflow: hidden; white-space: nowrap; padding: 9px 0; }
+        .pay-track { display: inline-flex; align-items: center; width: max-content; animation: payScroll 26s linear infinite; }
+        .pay-track span { display: inline-flex; align-items: center; }
+        .pay-item { font-size: 0.72rem; letter-spacing: 0.07em; text-transform: uppercase; font-weight: 600; color: rgba(255,255,255,0.92); padding: 0 16px; }
+        .pay-item svg { width: 13px; height: 13px; margin-right: 7px; stroke: var(--teal); fill: none; stroke-width: 2; flex-shrink: 0; }
+        .pay-dot { color: var(--teal); font-size: 0.6rem; }
+        @keyframes payScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        @media (prefers-reduced-motion: reduce) { .pay-track { animation: none; } }
+
         /* ============= NAVBAR ============= */
         .nav {
-            position: fixed; top: 0; width: 100%; z-index: 1000;
+            position: relative; width: 100%;
             padding: 18px 5%;
             display: flex; justify-content: space-between; align-items: center;
             background: rgba(250,248,245,0.92);
@@ -57,11 +69,12 @@
             display: grid;
             grid-template-columns: 1fr 420px 1fr;
             align-items: center;
-            padding: 100px 5% 60px;
+            padding: 138px 5% 60px;
             gap: 40px;
             position: relative;
             overflow: hidden;
         }
+        section[id] { scroll-margin-top: 118px; }
         .hero::before {
             content: ''; position: absolute; inset: 0;
             background: radial-gradient(ellipse 60% 70% at 50% 60%, rgba(60,191,180,0.07) 0%, transparent 70%);
@@ -85,8 +98,8 @@
         .hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--teal); }
         .hero-h1 {
             font-family: var(--serif); font-size: clamp(2.2rem, 3.2vw, 3.4rem);
-            font-weight: 700; line-height: 1.1; color: var(--ink);
-            margin-bottom: 22px; letter-spacing: -0.02em;
+            font-weight: 700; line-height: 1.18; color: var(--ink);
+            margin-bottom: 22px; letter-spacing: -0.01em;
         }
         .hero-h1 em { font-style: normal; color: var(--teal); font-weight: 800; }
         .hero-desc { font-size: 1rem; color: var(--mid); line-height: 1.7; max-width: 360px; }
@@ -110,7 +123,7 @@
         .b1 { bottom: 30px; left: -20px; }
         .b2 { top: 40px; right: -20px; }
         .hero-right { z-index: 2; text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 28px; }
-        .hero-h2 { font-family: var(--serif); font-size: clamp(1.7rem, 2.3vw, 2.4rem); font-weight: 600; line-height: 1.2; color: var(--ink); letter-spacing: -0.02em; }
+        .hero-h2 { font-family: var(--serif); font-size: clamp(1.7rem, 2.3vw, 2.4rem); font-weight: 600; line-height: 1.28; color: var(--ink); letter-spacing: -0.01em; }
         .btn-primary {
             display: inline-flex; align-items: center; gap: 10px;
             background: var(--teal); color: var(--white);
@@ -122,7 +135,7 @@
         .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 18px 36px rgba(60,191,180,0.45); }
         .btn-primary svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; }
         .hero-stats { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; }
-        .stat-num { font-family: var(--serif); font-size: 2.8rem; font-weight: 800; color: var(--ink); line-height: 1; letter-spacing: -0.03em; }
+        .stat-num { font-family: var(--serif); font-size: 2.8rem; font-weight: 800; color: var(--ink); line-height: 1.05; letter-spacing: -0.015em; }
         .stat-label { font-size: 0.78rem; color: var(--mid); letter-spacing: 0.05em; text-transform: uppercase; }
 
         /* ============= PROFILE ============= */
@@ -144,7 +157,7 @@
         .section-tag::before { content: '—'; }
         .section-h2 {
             font-family: var(--serif); font-size: clamp(1.9rem, 2.8vw, 2.8rem);
-            font-weight: 700; line-height: 1.15; color: var(--ink); margin-bottom: 20px; letter-spacing: -0.02em;
+            font-weight: 700; line-height: 1.22; color: var(--ink); margin-bottom: 20px; letter-spacing: -0.01em;
         }
         .profile-bio { font-size: 1.05rem; color: var(--mid); line-height: 1.75; margin-bottom: 32px; }
         .check-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; }
@@ -174,7 +187,7 @@
         }
         .story-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
         .story-line { width: 40px; height: 2px; background: var(--teal); margin-bottom: 24px; }
-        .story-h { font-family: var(--serif); font-size: clamp(2rem, 3.2vw, 3.2rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; }
+        .story-h { font-family: var(--serif); font-size: clamp(2rem, 3.2vw, 3.2rem); font-weight: 700; line-height: 1.25; letter-spacing: -0.01em; }
         .story-h em { font-style: normal; color: var(--teal); }
         .story-p { font-size: 1.05rem; line-height: 1.8; color: rgba(255,255,255,0.75); margin-bottom: 20px; }
         .story-cta { display: inline-flex; align-items: center; gap: 10px; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); font-weight: 600; margin-top: 12px; }
@@ -224,24 +237,6 @@
         .case-body h3 { font-family: var(--serif); font-size: 1.2rem; font-weight: 700; color: var(--ink); margin-bottom: 6px; letter-spacing: -0.01em; }
         .case-body p { font-size: 0.88rem; color: var(--mid); line-height: 1.55; }
 
-        /* ============= OFFER ============= */
-        .offer { padding: 110px 20px; background: var(--ink); position: relative; overflow: hidden; text-align: center; }
-        .offer::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 700px; height: 700px; background: radial-gradient(circle, rgba(60,191,180,0.12) 0%, transparent 65%); pointer-events: none; }
-        .offer-card { background: var(--white); max-width: 560px; margin: 0 auto; position: relative; z-index: 5; border-radius: 4px; border-top: 4px solid var(--teal); padding: 52px 44px; box-shadow: 0 24px 60px rgba(0,0,0,0.35); }
-        .offer-tag { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mid); font-weight: 600; }
-        .offer-h { font-family: var(--serif); font-size: 2.4rem; font-weight: 700; color: var(--ink); margin: 10px 0; line-height: 1.1; letter-spacing: -0.02em; }
-        .offer-sub { font-size: 0.95rem; color: var(--mid); margin-bottom: 32px; }
-        .benefit-list { text-align: left; display: inline-flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
-        .ben { display: flex; align-items: center; gap: 12px; font-size: 0.93rem; color: var(--ink-light); }
-        .ben-icon { width: 22px; height: 22px; border-radius: 50%; background: var(--teal-pale); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-        .ben-icon svg { width: 12px; height: 12px; stroke: var(--teal); fill: none; stroke-width: 2.5; }
-        .divider { width: 100%; height: 1px; background: var(--border); margin: 24px 0; }
-        .offer-price { font-family: var(--serif); font-size: 2rem; font-weight: 700; color: var(--ink); letter-spacing: -0.01em; }
-        .offer-note { font-size: 0.83rem; color: var(--teal); font-weight: 600; margin-top: 4px; }
-        .btn-offer { display: block; width: 100%; background: var(--ink); color: var(--white); padding: 17px; margin-top: 20px; border-radius: 4px; font-weight: 600; font-size: 0.9rem; letter-spacing: 0.07em; text-transform: uppercase; transition: background 0.3s; }
-        .btn-offer:hover { background: var(--teal); }
-        .offer-limit { margin-top: 14px; font-size: 0.78rem; color: var(--mid); }
-
         /* ============= TREATMENTS ============= */
         .treats { padding: 100px 5%; background: var(--cream); border-top: 1px solid var(--border); }
         .treats-inner { max-width: 1100px; margin: 0 auto; display: flex; gap: 70px; align-items: start; }
@@ -269,14 +264,18 @@
 
         /* ============= LOCATION ============= */
         .location { max-width: 1100px; margin: 0 auto 100px; padding: 0 20px; }
+        .loc-group { display: flex; flex-direction: column; gap: 40px; }
+        .loc-label { display: inline-flex; align-items: center; gap: 8px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal-dark); margin-bottom: 14px; }
         .loc-grid { display: grid; grid-template-columns: 1fr 1fr; border-radius: 16px; overflow: hidden; box-shadow: 0 12px 40px rgba(14,26,38,0.09); border: 1px solid var(--border); }
         .loc-img { position: relative; min-height: 400px; }
         .loc-img img { width: 100%; height: 100%; object-fit: cover; }
         .loc-right { display: flex; flex-direction: column; }
         .loc-map { flex: 1; min-height: 260px; position: relative; }
         .loc-map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+        .loc-map--full { min-height: 400px; }
         .loc-text { padding: 36px; background: #f9f9f8; }
-        .loc-title { font-family: var(--serif); font-size: 1.4rem; font-weight: 700; color: var(--ink); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; letter-spacing: -0.01em; }
+        .loc-text--center { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .loc-title { font-family: var(--serif); font-size: 1.4rem; font-weight: 700; color: var(--ink); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; letter-spacing: -0.01em; line-height: 1.3; }
         .loc-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 4px rgba(60,191,180,0.2); flex-shrink: 0; }
         .loc-desc { font-size: 0.93rem; color: var(--mid); line-height: 1.7; }
 
@@ -314,11 +313,62 @@
         .float-wa:hover { transform: scale(1.1); }
         .float-wa svg { width: 28px; height: 28px; fill: currentColor; }
 
+        /* ============= FONASA BENEFIT ============= */
+        .fonasa-section { padding: 90px 5%; background: var(--teal-pale); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .fonasa-inner { max-width: 780px; margin: 0 auto; text-align: center; }
+        .fonasa-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--white); color: var(--teal-dark); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 18px; border-radius: 50px; margin-bottom: 20px; box-shadow: 0 4px 14px rgba(14,26,38,0.06); }
+        .fonasa-inner .section-h2 { margin-bottom: 14px; }
+        .fonasa-desc { font-size: 1.02rem; color: var(--ink-light); line-height: 1.75; margin-bottom: 10px; }
+        .fonasa-highlight { font-family: var(--serif); font-size: 1.5rem; font-weight: 800; color: var(--ink); letter-spacing: -0.01em; margin: 18px 0 26px; }
+        .fonasa-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+        .btn-fonasa-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--ink); color: var(--white); padding: 14px 28px; border-radius: 50px; font-size: 0.86rem; font-weight: 600; letter-spacing: 0.02em; transition: background 0.25s, transform 0.25s; }
+        .btn-fonasa-primary:hover { background: var(--teal-dark); transform: translateY(-2px); }
+        .btn-fonasa-outline { display: inline-flex; align-items: center; gap: 8px; background: var(--white); color: var(--ink); border: 1.5px solid var(--border); padding: 14px 28px; border-radius: 50px; font-size: 0.86rem; font-weight: 600; letter-spacing: 0.02em; transition: border-color 0.25s, transform 0.25s; }
+        .btn-fonasa-outline:hover { border-color: var(--teal); transform: translateY(-2px); }
+        .fonasa-btns svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; }
+        .fonasa-note { font-size: 0.78rem; color: var(--mid); margin-top: 20px; }
+
+        /* ============= HOOK (OFERTA DE ENTRADA — SECCIÓN PRINCIPAL) ============= */
+        .hook-section { padding: 100px 5% 108px; background: var(--ink); position: relative; overflow: hidden; }
+        .hook-section::before { content: ''; position: absolute; top: -120px; left: 50%; transform: translateX(-50%); width: 900px; height: 900px; background: radial-gradient(circle, rgba(60,191,180,0.18) 0%, transparent 65%); pointer-events: none; }
+        .hook-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 2; }
+        .hook-head { text-align: center; max-width: 620px; margin: 0 auto 56px; }
+        .hook-head .section-tag { justify-content: center; }
+        .hook-head .section-h2 { color: var(--white); margin-bottom: 12px; }
+        .hook-sub { font-size: 1.05rem; color: rgba(255,255,255,0.78); line-height: 1.75; }
+
+        .hook-cards { display: grid; grid-template-columns: 1fr auto 1fr; align-items: stretch; gap: 26px; max-width: 940px; margin: 0 auto; }
+        .hook-card { border-radius: 22px; padding: 38px 34px; display: flex; flex-direction: column; gap: 8px; }
+        .hook-card--main { background: var(--white); border-top: 5px solid var(--teal); box-shadow: 0 24px 60px rgba(0,0,0,0.4); }
+        .hook-card--add { background: var(--white); border-top: 5px solid var(--teal-dark); box-shadow: 0 24px 60px rgba(0,0,0,0.4); position: relative; }
+        .hook-card--add::after { content: 'Recomendado'; position: absolute; top: -13px; right: 28px; background: var(--teal); color: var(--white); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 5px 14px; border-radius: 50px; box-shadow: 0 6px 16px rgba(60,191,180,0.4); }
+        .hook-card-label { font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); font-weight: 700; }
+        .hook-card--add .hook-card-label { color: var(--teal-dark); }
+        .hook-card-title { font-family: var(--serif); font-size: 1.3rem; font-weight: 700; color: var(--ink); letter-spacing: -0.01em; line-height: 1.25; margin-top: 2px; }
+        .hook-price { font-family: var(--serif); font-size: clamp(2.3rem, 3.8vw, 2.9rem); font-weight: 700; color: var(--ink); letter-spacing: -0.01em; line-height: 1.05; margin: 8px 0 4px; }
+        .hook-price--accent { color: var(--teal-dark); }
+        .hook-card-desc { font-size: 0.97rem; font-weight: 600; color: var(--ink-light); }
+        .hook-card-note { font-size: 0.88rem; color: var(--mid); line-height: 1.65; }
+        .hook-card-tag { font-size: 0.8rem; color: var(--teal-dark); font-weight: 700; margin-top: 8px; }
+
+        .hook-connector { display: flex; align-items: center; justify-content: center; color: var(--teal); }
+        .hook-connector svg { stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+        .hook-steps { display: flex; align-items: flex-start; justify-content: center; max-width: 940px; margin: 68px auto 0; }
+        .hook-step { flex: 1; text-align: center; padding: 0 14px; }
+        .hook-step-num { display: inline-flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 0.84rem; font-weight: 700; color: var(--teal); background: rgba(60,191,180,0.14); border: 1.5px solid var(--teal); border-radius: 50%; width: 36px; height: 36px; margin-bottom: 14px; }
+        .hook-step h4 { font-size: 0.98rem; font-weight: 600; color: var(--white); margin-bottom: 5px; line-height: 1.35; }
+        .hook-step p { font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.55; }
+        .hook-step-line { flex: 0 0 56px; height: 1px; background: rgba(255,255,255,0.14); margin-top: 18px; }
+
+        .hook-cta { text-align: center; margin-top: 56px; }
+        .hook-cta-note { font-size: 0.87rem; color: rgba(255,255,255,0.6); margin-top: 16px; }
+
         /* ============= RESPONSIVE ============= */
         @media (max-width: 1000px) {
             .nav-links { display: none; }
             .mobile-toggle { display: block; }
-            .hero { display: flex; flex-direction: column; padding: 90px 6% 50px; min-height: 100svh; gap: 0; }
+            .hero { display: flex; flex-direction: column; padding: 122px 6% 50px; min-height: 100svh; gap: 0; }
             .hero-wm { font-size: 22vw; bottom: 10px; letter-spacing: -0.03em; width: auto; left: 0; transform: none; text-align: left; padding-left: 4%; }
             .wm-full { display: none; }
             .wm-short { display: inline; }
@@ -345,12 +395,19 @@
             .vid-wrap { max-width: 320px; margin: 0 auto; }
             .loc-grid { grid-template-columns: 1fr; }
             .loc-img { height: 250px; min-height: auto; }
+            .loc-map--full { min-height: 240px; }
+            .hook-cards { grid-template-columns: 1fr; max-width: 420px; }
+            .hook-connector svg { transform: rotate(90deg); }
+            .hook-steps { flex-direction: column; align-items: center; gap: 28px; }
+            .hook-step { flex: none; width: 100%; max-width: 280px; padding: 0; display: flex; flex-direction: column; align-items: center; }
+            .hook-step-line { display: none; }
         }
         @media (max-width: 640px) {
             .check-list { grid-template-columns: 1fr; }
             .treats-grid { grid-template-columns: 1fr 1fr; }
-            .offer-card { padding: 32px 24px; }
             .float-wa { bottom: 18px; right: 18px; width: 48px; height: 48px; }
+            .hook-section { padding: 72px 5% 80px; }
+            .hook-card { padding: 28px 24px; }
         }
 
         /* ============= SCROLL ANIMATIONS ============= */
@@ -360,21 +417,38 @@
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <nav class="nav">
-        <a href="#" class="nav-logo">
-            <img src="logo.png" alt="Dra. Carla Huaiquivil" style="height: 40px; width: auto; display: block;">
-        </a>
-        <div class="mobile-toggle">☰</div>
-        <ul class="nav-links">
-            <li><a href="#profile">Perfil</a></li>
-            <li><a href="#story">Filosofía</a></li>
-            <li><a href="#gallery">Casos</a></li>
-            <li><a href="#treats">Tratamientos</a></li>
-            <li><a href="#location">Ubicación</a></li>
-            <li><a href="#offer" class="nav-cta">Agendar Evaluación</a></li>
-        </ul>
-    </nav>
+    <!-- SITE HEADER -->
+    <div class="site-header">
+        <div class="pay-bar" aria-label="Medios de pago disponibles">
+            <div class="pay-track">
+                <span class="pay-item"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>Aceptamos todos los medios de pago</span><span class="pay-dot">•</span>
+                <span class="pay-item">Débito</span><span class="pay-dot">•</span>
+                <span class="pay-item">Crédito</span><span class="pay-dot">•</span>
+                <span class="pay-item">Transferencia</span><span class="pay-dot">•</span>
+                <span class="pay-item">Transbank</span><span class="pay-dot">•</span>
+                <span class="pay-item"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>Aceptamos todos los medios de pago</span><span class="pay-dot">•</span>
+                <span class="pay-item">Débito</span><span class="pay-dot">•</span>
+                <span class="pay-item">Crédito</span><span class="pay-dot">•</span>
+                <span class="pay-item">Transferencia</span><span class="pay-dot">•</span>
+                <span class="pay-item">Transbank</span><span class="pay-dot">•</span>
+            </div>
+        </div>
+        <nav class="nav">
+            <a href="#" class="nav-logo">
+                <img src="logo.png" alt="Dra. Carla Huaiquivil" style="height: 40px; width: auto; display: block;">
+            </a>
+            <div class="mobile-toggle">☰</div>
+            <ul class="nav-links">
+                <li><a href="#hook">Oferta</a></li>
+                <li><a href="#profile">Perfil</a></li>
+                <li><a href="#story">Filosofía</a></li>
+                <li><a href="#gallery">Casos</a></li>
+                <li><a href="#treats">Tratamientos</a></li>
+                <li><a href="#location">Ubicación</a></li>
+                <li><a href="#hook" class="nav-cta">Agendar Evaluación</a></li>
+            </ul>
+        </nav>
+    </div>
 
     <!-- HERO -->
     <header class="hero">
@@ -403,12 +477,76 @@
                 <span class="stat-label">Años de experiencia</span>
             </div>
             <h2 class="hero-h2">Trato directo con tu<br>dentista de confianza.</h2>
-            <a href="#offer" class="btn-primary">
+            <a href="#hook" class="btn-primary">
                 Agendar una visita
                 <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
         </div>
     </header>
+
+    <!-- HOOK: OFERTA DE ENTRADA (BLANQUEAMIENTO) -->
+    <section id="hook" class="hook-section">
+        <div class="hook-inner">
+
+            <div class="hook-head fade-up">
+                <div class="section-tag" style="justify-content:center;">Nuevos Pacientes</div>
+                <h2 class="section-h2">Una sonrisa más blanca comienza aquí</h2>
+                <p class="hook-sub">Da el primer paso con una limpieza dental y descubre la opción de blanqueamiento especialmente disponible para ti.</p>
+            </div>
+
+            <div class="hook-cards fade-up">
+                <div class="hook-card hook-card--main">
+                    <span class="hook-card-label">Paso 1 · Entrada</span>
+                    <h3 class="hook-card-title">Limpieza Dental</h3>
+                    <div class="hook-price">$14.990</div>
+                    <p class="hook-card-desc">Incluye diagnóstico y plan de tratamiento personalizado</p>
+                    <p class="hook-card-note">Conoce el estado de tu salud oral y recibe una evaluación personalizada antes de decidir si quieres avanzar con un blanqueamiento.</p>
+                </div>
+
+                <div class="hook-connector" aria-hidden="true">
+                    <svg width="26" height="26" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </div>
+
+                <div class="hook-card hook-card--add">
+                    <span class="hook-card-label">Paso 2 · Opcional</span>
+                    <h3 class="hook-card-title">¿Quieres dar un paso más?</h3>
+                    <div class="hook-price hook-price--accent">$39.990</div>
+                    <p class="hook-card-desc">1 sesión de blanqueamiento dental</p>
+                    <p class="hook-card-note">Puedes decidir realizarlo después de tu limpieza. No tienes compromiso de tomar el blanqueamiento.</p>
+                    <p class="hook-card-tag">Disponible para agendar hasta 20 días después de realizada la limpieza.</p>
+                </div>
+            </div>
+
+            <div class="hook-steps fade-up">
+                <div class="hook-step">
+                    <span class="hook-step-num">01</span>
+                    <h4>Agenda tu limpieza</h4>
+                    <p>$14.990</p>
+                </div>
+                <div class="hook-step-line"></div>
+                <div class="hook-step">
+                    <span class="hook-step-num">02</span>
+                    <h4>Realiza tu diagnóstico y limpieza</h4>
+                    <p>Incluye plan de tratamiento personalizado</p>
+                </div>
+                <div class="hook-step-line"></div>
+                <div class="hook-step">
+                    <span class="hook-step-num">03</span>
+                    <h4>Si quieres, agrega tu blanqueamiento</h4>
+                    <p>$39.990 · hasta 20 días después</p>
+                </div>
+            </div>
+
+            <div class="hook-cta fade-up">
+                <a href="https://wa.me/56920691504?text=Hola%2C%20quiero%20agendar%20mi%20limpieza%20dental." class="btn-primary">
+                    Agenda tu limpieza
+                    <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <p class="hook-cta-note">Agenda primero tu limpieza y decide después si quieres realizar el blanqueamiento.</p>
+            </div>
+
+        </div>
+    </section>
 
     <!-- PROFILE -->
     <section id="profile" class="profile">
@@ -543,25 +681,6 @@
         </div>
     </section>
 
-    <!-- OFFER -->
-    <section id="offer" class="offer">
-        <div class="offer-card fade-up">
-            <div class="offer-tag">Experiencia Smile Again</div>
-            <h2 class="offer-h">Experiencia<br>Smile Again</h2>
-            <p class="offer-sub">No es solo una consulta. Es el primer paso real hacia tu nueva imagen.</p>
-            <ul class="benefit-list">
-                <li class="ben"><span class="ben-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Diagnóstico clínico completo</li>
-                <li class="ben"><span class="ben-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Limpieza dental exhaustiva + destartaje</li>
-                <li class="ben"><span class="ben-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Presupuesto personalizado sin compromiso</li>
-            </ul>
-            <div class="divider"></div>
-            <div class="offer-price">Reserva por $14.990 CLP</div>
-            <div class="offer-note">*¡Haz que tu limpieza te salga GRATIS! Si decides dar el siguiente paso hacia un blanqueamiento, el 100% de lo que pagaste hoy se descontará del valor total.</div>
-            <a href="https://wa.me/56920691504" class="btn-offer">Quiero agendar mi sesión</a>
-            <p class="offer-limit">Solo 10 cupos disponibles este mes.</p>
-        </div>
-    </section>
-
     <!-- TREATMENTS -->
     <section id="treats" class="treats">
         <div class="treats-inner">
@@ -600,6 +719,27 @@
                     </iframe>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- FONASA BENEFIT -->
+    <section id="fonasa" class="fonasa-section">
+        <div class="fonasa-inner fade-up">
+            <span class="fonasa-badge">Beneficio Fonasa B · C · D</span>
+            <h2 class="section-h2">¿Eres beneficiario Fonasa tramo B, C o D?</h2>
+            <p class="fonasa-desc">Podrías acceder a un reembolso por los insumos utilizados en tu prótesis dental removible, gestionado directamente por Fonasa.</p>
+            <div class="fonasa-highlight">Hasta $50.000 aprox. de reembolso</div>
+            <div class="fonasa-btns">
+                <a href="https://www.fonasa.gob.cl/reembolsos-de-protesis-y-ortesis/" target="_blank" rel="noopener" class="btn-fonasa-primary">
+                    Ver condiciones en Fonasa
+                    <svg viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
+                </a>
+                <a href="https://www.chileatiende.gob.cl/fichas/85589-solicitar-reembolso-de-protesis-y-ortesis-a-fonasa" target="_blank" rel="noopener" class="btn-fonasa-outline">
+                    Ver proceso en ChileAtiende
+                    <svg viewBox="0 0 24 24"><path d="M7 17L17 7M7 7h10v10"/></svg>
+                </a>
+            </div>
+            <p class="fonasa-note">El monto y la aprobación del reembolso dependen del arancel vigente de Fonasa y de tu situación particular.</p>
         </div>
     </section>
 
@@ -671,18 +811,37 @@
         <div class="section-head fade-up">
             <div class="section-tag" style="justify-content:center;">Cómo Llegar</div>
             <h2 class="section-h2">Encuéntranos en Temuco</h2>
+            <p style="text-align:center;color:var(--mid);font-size:0.9rem;margin-top:6px;">Dos direcciones para atenderte</p>
         </div>
-        <div class="loc-grid fade-up">
-            <div class="loc-img">
-                <img src="box.jpg" alt="Entrada Clínica">
-            </div>
-            <div class="loc-right">
-                <div class="loc-map">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3112.2569536641486!2d-72.60719449999999!3d-38.7348654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9614d3f117487e09%3A0x60086266c1d418de!2sTrizano%20430%2C%204801023%20Cautin%2C%20Temuco%2C%20Araucan%C3%ADa!5e0!3m2!1ses!2scl!4v1768512468496!5m2!1ses!2scl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="loc-group">
+            <div class="fade-up">
+                <span class="loc-label"><span class="loc-dot"></span>Sede Trizano</span>
+                <div class="loc-grid">
+                    <div class="loc-img">
+                        <img src="box.jpg" alt="Entrada Clínica">
+                    </div>
+                    <div class="loc-right">
+                        <div class="loc-map">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3112.2569536641486!2d-72.60719449999999!3d-38.7348654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9614d3f117487e09%3A0x60086266c1d418de!2sTrizano%20430%2C%204801023%20Cautin%2C%20Temuco%2C%20Araucan%C3%ADa!5e0!3m2!1ses!2scl!4v1768512468496!5m2!1ses!2scl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                        <div class="loc-text">
+                            <h3 class="loc-title"><span class="loc-dot"></span>Trizano 430, Oficina 308, Temuco</h3>
+                            <p class="loc-desc">Espacio cómodo, seguro y tranquilo a pasos de Avenida Alemania. Estacionamiento cercano y fácil acceso en transporte público.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="loc-text">
-                    <h3 class="loc-title"><span class="loc-dot"></span>Trizano 430, Oficina 308, Temuco</h3>
-                    <p class="loc-desc">Espacio cómodo, seguro y tranquilo a pasos de Avenida Alemania. Estacionamiento cercano y fácil acceso en transporte público.</p>
+            </div>
+
+            <div class="fade-up">
+                <span class="loc-label"><span class="loc-dot"></span>Sede Centro · Bulnes</span>
+                <div class="loc-grid">
+                    <div class="loc-map loc-map--full">
+                        <iframe src="https://www.google.com/maps?q=Bulnes+815+Edificio+Las+Raices+Temuco+Chile&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <div class="loc-text loc-text--center">
+                        <h3 class="loc-title"><span class="loc-dot"></span>Bulnes 815, Oficina 310, Edificio Las Raíces</h3>
+                        <p class="loc-desc">Ubicación céntrica en pleno centro de Temuco, dentro del Edificio Las Raíces. Fácil acceso caminando o en transporte público, cerca de todo el centro cívico y comercial.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -735,7 +894,7 @@
             if (links.style.display === 'flex') {
                 links.style.display = 'none';
             } else {
-                links.style.cssText = 'display:flex;flex-direction:column;position:fixed;top:60px;left:0;right:0;background:rgba(250,248,245,0.97);padding:24px 5%;gap:20px;border-bottom:1px solid rgba(14,26,38,0.08);backdrop-filter:blur(16px);z-index:999;';
+                links.style.cssText = 'display:flex;flex-direction:column;position:fixed;top:96px;left:0;right:0;background:rgba(250,248,245,0.97);padding:24px 5%;gap:20px;border-bottom:1px solid rgba(14,26,38,0.08);backdrop-filter:blur(16px);z-index:999;';
             }
         });
     </script>
